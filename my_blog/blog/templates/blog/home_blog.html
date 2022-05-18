@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+</head>
+<body>
+
+    {% extends 'portfolio/base.html' %}
+    {% block content %}
+
+    <form action="{% url "home" %}">
+        <input type="submit" value = "Home">
+    </form>
+
+    <h1>Viktor's blog</h1>
+    <p class:'abaut_informations'>At this page, you can reed about me and my life:</p>
+    {% for blog in blogs %}
+
+    <a href='{% url "blog:detail" blog.id %}'><h2>{{ blog.title }}</h2></a>
+    <h5>{{ blog.date|date:"d/m/Y" }}</h5><br>
+  </p>{{ blog.text|striptags|truncatechars:100 }}</p>
+    {% if blog.url %}
+    <a href="{{ blog.url}}">Link</a>
+    {% endif %}
+    {% endfor %}
+
+    {% endblock %}
+
+</body>
+</html>
